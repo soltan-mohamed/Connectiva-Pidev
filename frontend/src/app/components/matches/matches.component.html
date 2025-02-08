@@ -1,0 +1,28 @@
+<!-- src/app/components/matches/matches.component.html -->
+<div class="matches-container">
+    <h2 class="matches-title">Your Matches</h2>
+    
+    <div *ngIf="matches.length === 0; else matchesList" class="no-matches-message">
+      <p>No matches found yet. Check back later!</p>
+    </div>
+  
+    <ng-template #matchesList>
+      <div class="matches-grid">
+        <div *ngFor="let match of matches" class="match-card">
+          <div class="card-header">
+            <h3 class="match-name">{{ match.name }}</h3>
+            <a class="match-email" href="mailto:{{ match.email }}">{{ match.email }}</a>
+          </div>
+          
+          <div *ngIf="match.interests?.length" class="interests-section">
+            <h4 class="interests-title">Common Interests:</h4>
+            <ul class="interests-list">
+              <li *ngFor="let interest of match.interests" class="interest-item">
+                {{ interest }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>

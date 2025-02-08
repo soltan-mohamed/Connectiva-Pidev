@@ -1,0 +1,68 @@
+<!-- registration.component.html -->
+<form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
+    <div class="form-group">
+      <input 
+        type="text" 
+        [(ngModel)]="user.name" 
+        name="name" 
+        required
+        placeholder="Name"
+        #nameInput="ngModel"
+      >
+      <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" 
+           class="error-message">
+        Name is required
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <input
+        type="email"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        placeholder="Email"
+        #emailInput="ngModel"
+      >
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" 
+           class="error-message">
+        Valid email is required
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <div class="interest-input">
+        <input 
+          type="text" 
+          [(ngModel)]="newInterest" 
+          name="newInterest" 
+          placeholder="Add interest"
+          (keyup.enter)="addInterest()"
+        >
+        <button type="button" (click)="addInterest()">Add</button>
+      </div>
+      <div class="interests-list">
+        <span *ngFor="let interest of user.interests" class="interest-tag">
+          {{ interest }}
+          <button 
+            type="button" 
+            class="remove-btn" 
+            (click)="removeInterest(interest)"
+          >×</button>
+        </span>
+      </div>
+    </div>
+  
+    <button 
+      type="submit" 
+      [disabled]="!registrationForm.valid" 
+      class="submit-btn"
+    >
+      Register
+    </button>
+  </form>
+  
+  <div *ngIf="registrationForm.submitted && !registrationForm.valid" 
+       class="form-error">
+    Please correct the errors in the form!
+  </div>
