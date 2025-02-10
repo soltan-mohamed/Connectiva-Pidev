@@ -23,7 +23,7 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
-
+//test
     @ElementCollection
     private List<String> interests = new ArrayList<>();
 
